@@ -25,3 +25,18 @@ SELECT title, release_year
     WHERE type = 'Movie'
     ORDER BY release_year asc
     LIMIT 1;
+
+/* NOTE: The above SQL gives a correct answer,
+but there are actually 2 movies that came out that year! 
+You can see the second one by changing
+LIMIT 1 to LIMIT 2. 
+Or, you can use a "subquery" like this to see all the oldest movies
+without assuming that there was only 1 that year: */
+
+SELECT title, release_year 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie'
+AND release_year <= 
+(SELECT MIN(release_year) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie');
