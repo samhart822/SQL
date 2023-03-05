@@ -94,3 +94,11 @@ SELECT time_signature, COUNT(time_signature) AS time_sig_popularity
     FROM BIT_DB.spotifydata
     GROUP BY time_signature
     ORDER BY time_sig_popularity DESC;
+    
+/* Are there any artists that use the same song key? */
+SELECT DISTINCT A.artist_name, B.artist_name, A.song_key
+    FROM BIT_DB.Spotifydata A
+    JOIN BIT_DB.Spotifydata B
+    ON A.id <> B.id
+    AND A.song_key = B.song_key
+    ORDER BY A.song_key;
