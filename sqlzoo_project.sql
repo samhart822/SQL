@@ -1,5 +1,17 @@
 /* This is SQL I wrote to answer practice problems and quizzes from SQLZoo.net */
 
+/* Show the population of Germany. */
+SELECT population FROM world
+  WHERE name = 'Germany';
+  
+/* Show the name and the population for 'Sweden', 'Norway' and 'Denmark'. */
+SELECT name, population FROM world
+  WHERE name IN ('Sweden', 'Norway', 'Denmark');
+  
+/* Show the country and the area for countries with an area between 200,000 and 250,000. */
+SELECT name, area FROM world
+  WHERE area BETWEEN 200000 AND 250000;
+
 /* Write the SQL command to show the name, continent and population of all countries. */
 SELECT name, continent, population FROM world;
 
@@ -49,4 +61,8 @@ SELECT name, ROUND(population / 1000000 , 2), ROUND(gdp / 1000000000 , 2)
 FROM world
 WHERE continent = 'South America';
 
-/* 
+/* Show the name and per-capita GDP for those countries with a GDP of at least one trillion (1000000000000; that is 12 zeros). Round this value to the nearest 1000.
+Show per-capita GDP for the trillion dollar countries to the nearest $1000. */
+SELECT name, ROUND(gdp / population , -3)
+FROM world
+WHERE gdp >= 1000000000000;
